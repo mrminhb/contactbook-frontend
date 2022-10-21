@@ -4,6 +4,7 @@
     import ContactList from '@/components/ContactList.vue'; 
     import { contactService } from '@/services/contact.service'
 
+
     export default {
         components: {
             ContactCard,
@@ -29,18 +30,20 @@
                     return { name, email, address, phone }.join('')
                 });
             },
-            filteredContact() {
-                if(!this.searchText) return this.contacts; 
-                return this.contacts.filter((contact, index) => 
-                    this.contactAsString[index].includes(this.searchText)
-                ) 
-            },
-            activeContact() {
-                if (this.activeIndex < 0) return null;
-                return this.filteredContacts[this.activeIndex]
-            },
-            filteredContactCount() {
-                return this.filteredContact.length
+            filteredContacts() { 
+                if (!this.searchText) return this.contacts; 
+                    return this.contacts.filter((contact, index) => 
+                        this.contactsAsStrings[index].includes(this.searchText)
+                    ); 
+                },
+
+            activeContact() { 
+                if (this.activeIndex < 0) return null; 
+                return this.filteredContacts[this.activeIndex]; 
+            }, 
+                
+            filteredContactsCount() { 
+                return this.filteredContacts.length; 
             },
         },
         methods: {
@@ -48,7 +51,7 @@
                 try {
                     const contactsList = await contactService.getMany();
                     this.contacts =  contactsList.sort((current, next) =>
-                        current.name.localCompare(next.name)
+                        current.name.localeCompare(next.name)
                     )
                 } catch (error) {
                     console.log(error)
@@ -87,8 +90,8 @@
                 Danh bạ <i class="fas fa-addess-book" />
             </h4>
             <ContactList 
-                v-if="filteredContactCount > 0"
-                :contacts="filteredContact"
+                v-if="filteredContactsCount > 0"
+                :contacts="filteredContacts"
                 v-model:activeIndex="activeIndex"
             />
             <p v-else>
