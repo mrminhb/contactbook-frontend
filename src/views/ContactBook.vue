@@ -13,7 +13,7 @@
         },
         data() {
             return {
-                contact: [],
+                contacts: [],
                 activeIndex: -1,
                 searchText: '',
             };
@@ -32,10 +32,10 @@
             },
             filteredContacts() { 
                 if (!this.searchText) return this.contacts; 
-                    return this.contacts.filter((contact, index) => 
-                        this.contactsAsStrings[index].includes(this.searchText)
-                    ); 
-                },
+                return this.contacts.filter((contact, index) => 
+                    this.contactsAsStrings[index].includes(this.searchText)
+                ); 
+            },
 
             activeContact() { 
                 if (this.activeIndex < 0) return null; 
@@ -125,6 +125,16 @@
                     <i class="fa fa-address-card"></i>
                 </h4>
                 <ContactCard :contact="activeContact" />
+                <router-link
+                    :to="{
+                        name: 'contact.edit',
+                        params: { id:activeContact.id },
+                    }"
+                >
+                    <span class="mt-2 badge badge-warning">
+                        <i class="fas fa-edit" /> Hiệu chỉnh
+                    </span>
+                </router-link>
             </div>
         </div>
     </div>
