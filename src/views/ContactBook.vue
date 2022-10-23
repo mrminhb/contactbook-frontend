@@ -70,9 +70,8 @@
                     }
                 }
             },
-
             goToAddContact() {
-                this.$router.push({ name: 'contact.add '});
+                this.$router.push({ name: 'contact.add' });
             },
         },
         mounted() {
@@ -128,7 +127,7 @@
                 <router-link
                     :to="{
                         name: 'contact.edit',
-                        params: { id:activeContact.id },
+                        params: { id: activeContact.id },
                     }"
                 >
                     <span class="mt-2 badge badge-warning">

@@ -78,7 +78,7 @@
                 name="address" 
                 type="text" 
                 class="form-control" 
-                v-model="contactLocal.name" 
+                v-model="contactLocal.address" 
             />
             <ErrorMessage name="address" class="error-feedback" />
         </div>
